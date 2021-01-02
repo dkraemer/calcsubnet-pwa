@@ -6,11 +6,16 @@
     "terminal.integrated.shell.linux": "/bin/bash"
   },
   "extensions": [
-    "EditorConfig.EditorConfig",
-    "yzhang.markdown-all-in-one",
+    "aaron-bond.better-comments",
+    "adammaras.overtype",
+    "angular.ng-template",
+    "dbaeumer.vscode-eslint",
+    "donjayamanne.githistory",
+    "editorConfig.editorConfig",
+    "johnpapa.angular2",
     "shd101wyy.markdown-preview-enhanced",
     "visualstudioexptteam.vscodeintellicode",
-    "adammaras.overtype"
+    "yzhang.markdown-all-in-one",
   ],
   //"forwardPorts": [],
   "postCreateCommand": "${containerWorkspaceFolder}/.devcontainer/postCreate.sh"

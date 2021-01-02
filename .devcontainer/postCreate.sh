@@ -16,7 +16,7 @@ cp -fv .devcontainer/.bashrc /root/
 #yarn global add gulp
 
 # Angular
-#yarn global add @angular/cli
+yarn global add @angular/cli
 #yarn global add http-server
 
 # Google Firebase
