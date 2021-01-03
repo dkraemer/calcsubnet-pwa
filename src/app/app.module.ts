@@ -39,6 +39,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 const materialModules = [
   CdkTreeModule,
@@ -76,7 +77,7 @@ const materialModules = [
 ];
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ToolbarComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

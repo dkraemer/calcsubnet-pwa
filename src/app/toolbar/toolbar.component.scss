@@ -1,0 +1,22 @@
+$app-toolbar-item-height: 64px;
+$app-toolbar-height: $app-toolbar-item-height * 1.5;
+
+.app-toolbar {
+  height: $app-toolbar-height;
+}
+
+.app-toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.app-icon {
+  height: $app-toolbar-item-height;
+  width: $app-toolbar-item-height;
+  font-size: $app-toolbar-item-height;
+  margin: 10px;
+}
+
+.app-title {
+  font-size: $app-toolbar-item-height;
+  font-weight: 100;
+}
