@@ -143,6 +143,10 @@ export class SubnetMask extends DotDecimal {
     }
   }
 
+  public static fromString(dotDecimalString: string): SubnetMask | undefined {
+    return super.parse(SubnetMask, dotDecimalString);
+  }
+
   /**
    * Validate a subnet mask.
    *
@@ -168,7 +172,11 @@ export class SubnetMask extends DotDecimal {
    * @param shouldThrow When true (default) an error is thrown if the subnet mask is invalid.
    * @returns The prefix length.
    */
-  public static getPrefixLength(value: number, shouldValidate: boolean = true, shouldThrow: boolean = true): number {
+  public static getPrefixLength(
+    value: number,
+    shouldValidate: boolean = true,
+    shouldThrow: boolean = true
+  ): number {
     if (shouldValidate) {
       SubnetMask.validate(value, shouldThrow);
     }
