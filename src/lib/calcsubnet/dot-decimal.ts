@@ -18,28 +18,40 @@ export abstract class DotDecimal implements Dumpable {
     this.dotDecimalString = this.toDotDecimalString();
   }
 
-  public static parse<T extends DotDecimal>(t: new (numValue: number) => T, dotDecimalString: string): T | null {
+  public static parseInt(dotDecimalString: string): number | undefined {
     const regExp = /^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/;
     const octets = this.parseOctets(regExp, dotDecimalString, Radix.dec);
     if (!octets) {
-      return null;
+      return undefined;
     }
 
     let hexValue = '0x';
-    octets.forEach(e => {
+    octets.forEach((e) => {
       const octetHex = e.toString(Radix.hex);
       hexValue += octetHex.length === 1 ? '0' + octetHex : octetHex;
     });
 
-    const value = Number.parseInt(hexValue, Radix.hex);
-    try {
-      return new t(value);
-    } catch (error) {
-      return null;
-    }
+    return Number.parseInt(hexValue, Radix.hex);
   }
 
-  private static parseOctets(regExp: RegExp, stringValue: string, radix: Radix): number[] | null {
+  protected static parse<T extends DotDecimal>(
+    t: new (value: number) => T,
+    dotDecimalString: string
+  ): T | undefined {
+    const value = this.parseInt(dotDecimalString);
+
+    if (!value) {
+      return undefined;
+    }
+
+    return new t(value);
+  }
+
+  private static parseOctets(
+    regExp: RegExp,
+    stringValue: string,
+    radix: Radix
+  ): number[] | null {
     const regRepExecArray = regExp.exec(stringValue);
     if (!regRepExecArray) {
       return null;
@@ -51,7 +63,7 @@ export abstract class DotDecimal implements Dumpable {
     }
 
     const retVal: number[] = [];
-    octetStrings.forEach(e => {
+    octetStrings.forEach((e) => {
       const result = Number.parseInt(e, radix);
       if (!Number.isNaN(result)) {
         retVal.push(result);
@@ -66,7 +78,11 @@ export abstract class DotDecimal implements Dumpable {
   }
 
   public dump(): string[] {
-    return [`value: ${this.value}`, `hexString: ${this.hexString}`, `dotDecimalString: ${this.dotDecimalString}`];
+    return [
+      `value: ${this.value}`,
+      `hexString: ${this.hexString}`,
+      `dotDecimalString: ${this.dotDecimalString}`,
+    ];
   }
 
   private toHexString(withPrefix: boolean = true): string {
@@ -92,7 +108,7 @@ export abstract class DotDecimal implements Dumpable {
     const octets = this.getOctets();
     const octetStrings: string[] = [];
 
-    octets.forEach(e => {
+    octets.forEach((e) => {
       octetStrings.push(e.toFixed());
     });
 
