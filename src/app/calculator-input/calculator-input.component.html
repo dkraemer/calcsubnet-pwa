@@ -1,11 +1,13 @@
 <div>
-  <form>
+  <form [formGroup]="formGroup">
     <mat-form-field floatLabel="auto">
-      <input matInput type="text" placeholder="192.168.188.1" required />
+      <input matInput formControlName="ipAddressControl" [errorStateMatcher]="noInputErrorStateMatcher" type="text"
+        placeholder="192.168.188.1" required />
       <mat-label>IP address</mat-label>
+      <mat-error>Please enter a valid IP address.</mat-error>
     </mat-form-field>
     <mat-form-field floatLabel="auto">
-      <mat-select [(value)]="selectedPrefixLength">
+      <mat-select [(value)]="selectedPrefixLength" [disabled]="ipAddressControl.invalid">
         <mat-option *ngFor="let subnetMask of subnetMasks" [value]="subnetMask.prefixLength">
           {{subnetMask.prefixLength}}
         </mat-option>
@@ -13,7 +15,7 @@
       <mat-label>Prefix length</mat-label>
     </mat-form-field>
     <mat-form-field floatLabel="auto">
-      <mat-select [(value)]="selectedPrefixLength">
+      <mat-select [(value)]="selectedPrefixLength" [disabled]="ipAddressControl.invalid">
         <mat-option *ngFor="let subnetMask of subnetMasks" [value]="subnetMask.prefixLength">
           {{subnetMask.dotDecimalString}}
         </mat-option>
@@ -21,7 +23,7 @@
       <mat-label>Subnet mask</mat-label>
     </mat-form-field>
     <mat-form-field floatLabel="auto">
-      <mat-select [(value)]="selectedPrefixLength">
+      <mat-select [(value)]="selectedPrefixLength" [disabled]="ipAddressControl.invalid">
         <mat-option *ngFor="let subnetMask of subnetMasks" [value]="subnetMask.prefixLength">
           {{subnetMask.usableHostAddressCount}}
         </mat-option>
