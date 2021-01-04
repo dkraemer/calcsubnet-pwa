@@ -1,16 +1,18 @@
+$main-color: #00838f;
+
 .header {
   padding: 0.75rem 1.25rem 0.75rem 1.25rem;
   margin: 0 0 1rem 0;
 }
 
 .light-on-dark {
-  background: #00838f;
+  background: $main-color;
   color: whitesmoke;
 }
 
 .dark-on-light {
   background: whitesmoke;
-  color: #00838f;
+  color: $main-color;
 }
 
 .bg-default {
@@ -18,7 +20,7 @@
 }
 
 $theme-colors: (
-  "primary": #00838f,
+  "primary": $main-color,
 );
 
 // * Import Bootstrap and its default variables
