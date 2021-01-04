@@ -1,4 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
+.header {
+  padding: 0.75rem 1.25rem 0.75rem 1.25rem;
+  margin: 0 0 1rem 0;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.light-on-dark {
+  background: #00838f;
+  color: whitesmoke;
+}
+
+.dark-on-light {
+  background: whitesmoke;
+  color: #00838f;
+}
+
+.bg-default {
+  background: whitesmoke;
+}
+
+$theme-colors: (
+  "primary": #00838f,
+);
+
+// * Import Bootstrap and its default variables
+// ! Place overrides ABOVE this import
+@import "~bootstrap/scss/bootstrap";
+
+// * Import Bootstrap icons
+@import "~bootstrap-icons/font/bootstrap-icons.css";

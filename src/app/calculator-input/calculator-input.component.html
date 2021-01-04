@@ -1,34 +1,76 @@
-<div>
-  <form [formGroup]="formGroup">
-    <mat-form-field floatLabel="auto">
-      <input matInput formControlName="ipAddressControl" [errorStateMatcher]="noInputErrorStateMatcher" type="text"
-        placeholder="192.168.188.1" required />
-      <mat-label>IP address</mat-label>
-      <mat-error>Please enter a valid IP address.</mat-error>
-    </mat-form-field>
-    <mat-form-field floatLabel="auto">
-      <mat-select [(value)]="selectedPrefixLength" [disabled]="ipAddressControl.invalid">
-        <mat-option *ngFor="let subnetMask of subnetMasks" [value]="subnetMask.prefixLength">
-          {{subnetMask.prefixLength}}
-        </mat-option>
-      </mat-select>
-      <mat-label>Prefix length</mat-label>
-    </mat-form-field>
-    <mat-form-field floatLabel="auto">
-      <mat-select [(value)]="selectedPrefixLength" [disabled]="ipAddressControl.invalid">
-        <mat-option *ngFor="let subnetMask of subnetMasks" [value]="subnetMask.prefixLength">
-          {{subnetMask.dotDecimalString}}
-        </mat-option>
-      </mat-select>
-      <mat-label>Subnet mask</mat-label>
-    </mat-form-field>
-    <mat-form-field floatLabel="auto">
-      <mat-select [(value)]="selectedPrefixLength" [disabled]="ipAddressControl.invalid">
-        <mat-option *ngFor="let subnetMask of subnetMasks" [value]="subnetMask.prefixLength">
-          {{subnetMask.usableHostAddressCount}}
-        </mat-option>
-      </mat-select>
-      <mat-label>Usable host addresses</mat-label>
-    </mat-form-field>
-  </form>
+<div class="border rounded p-2">
+  <div class="form-row align-items-center">
+    <div class="col-auto">
+      <label for="ip-address">IP address</label>
+      <div class="input-group">
+        <input id="ip-address" type="text" class="form-control" placeholder="Fill me, please..." required />
+      </div>
+    </div>
+    <div class="col-auto">
+      <label for="prefix-length">Prefix length</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">/</div>
+        </div>
+        <select id="prefix-length" class="custom-select">
+        </select>
+      </div>
+    </div>
+    <div class="col-auto">
+      <label for="subnet-mask">Subnet mask</label>
+      <div class="input-group">
+        <select id="subnet-mask" class="custom-select">
+
+        </select>
+      </div>
+    </div>
+    <div class="col-auto">
+      <label for="useable-host-address-count">Usable addresses</label>
+      <div class="input-group">
+        <select id="useable-host-address-count" class="custom-select">
+
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="mb-2"></div>
+  <div class="form-row align-items-center">
+    <div class="col-auto">
+      <label for="sid-network-address">Network address</label>
+      <div class="input-group">
+        <input id="sid-network-address" class="form-control" type="text" value="" readonly />
+      </div>
+    </div>
+    <div class="col-auto">
+      <label for="sid-first-address">First address</label>
+      <div class="input-group">
+        <input id="sid-first-address" class="form-control" type="text" value="" readonly />
+      </div>
+    </div>
+    <div class="col-auto">
+      <label for="sid-last-address">Last address</label>
+      <div class="input-group">
+        <input id="sid-last-address" class="form-control" type="text" value="" readonly />
+      </div>
+    </div>
+    <div class="col-auto">
+      <div class="form-row align-items-start">
+        <div class="col-auto">
+          <label for="sid-broadcast-address">Broadcast address</label>
+          <div class="input-group">
+            <input id="sid-broadcast-address" class="form-control" type="text" value="" readonly />
+          </div>
+        </div>
+        <div class="col-auto">
+          <label for="sid-btn-generate-list">&nbsp;</label>
+          <div class="input-group">
+            <button id="sid-btn-generate-list" class="btn btn-outline-primary" type="button" data-toggle="tooltip"
+              data-placement="top" title="Generate IP address list">
+              <span class="bi-list"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
