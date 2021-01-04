@@ -1,0 +1,32 @@
+<div>
+  <form>
+    <mat-form-field floatLabel="auto">
+      <input matInput type="text" placeholder="192.168.188.1" required />
+      <mat-label>IP address</mat-label>
+    </mat-form-field>
+    <mat-form-field floatLabel="auto">
+      <mat-select [(value)]="selectedPrefixLength">
+        <mat-option *ngFor="let subnetMask of subnetMasks" [value]="subnetMask.prefixLength">
+          {{subnetMask.prefixLength}}
+        </mat-option>
+      </mat-select>
+      <mat-label>Prefix length</mat-label>
+    </mat-form-field>
+    <mat-form-field floatLabel="auto">
+      <mat-select [(value)]="selectedPrefixLength">
+        <mat-option *ngFor="let subnetMask of subnetMasks" [value]="subnetMask.prefixLength">
+          {{subnetMask.dotDecimalString}}
+        </mat-option>
+      </mat-select>
+      <mat-label>Subnet mask</mat-label>
+    </mat-form-field>
+    <mat-form-field floatLabel="auto">
+      <mat-select [(value)]="selectedPrefixLength">
+        <mat-option *ngFor="let subnetMask of subnetMasks" [value]="subnetMask.prefixLength">
+          {{subnetMask.usableHostAddressCount}}
+        </mat-option>
+      </mat-select>
+      <mat-label>Usable host addresses</mat-label>
+    </mat-form-field>
+  </form>
+</div>

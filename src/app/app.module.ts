@@ -40,6 +40,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { CalculatorInputComponent } from './calculator-input/calculator-input.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const materialModules = [
   CdkTreeModule,
@@ -77,7 +79,7 @@ const materialModules = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, ToolbarComponent],
+  declarations: [AppComponent, ToolbarComponent, CalculatorInputComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -85,6 +87,8 @@ const materialModules = [
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),
+    FormsModule,
+    ReactiveFormsModule,
     ...materialModules,
   ],
   providers: [],
