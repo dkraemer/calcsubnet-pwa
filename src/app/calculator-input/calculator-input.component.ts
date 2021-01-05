@@ -11,7 +11,7 @@ import { CustomValidators } from '../common/custom.validators';
 @Component({
   selector: 'app-calculator-input',
   templateUrl: './calculator-input.component.html',
-  styleUrls: ['./calculator-input.component.scss'],
+  //styleUrls: ['./calculator-input.component.scss'],
 })
 export class CalculatorInputComponent implements AfterContentInit {
   @Output() subnetInfoChange = new EventEmitter<SubnetInfo>();

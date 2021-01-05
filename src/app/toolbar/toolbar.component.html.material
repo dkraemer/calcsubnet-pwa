@@ -1,8 +1,0 @@
-<p>
-  <mat-toolbar class="app-toolbar" color="primary">
-    <span class="app-toolbar-spacer"></span>
-    <mat-icon class="app-icon">{{ appIconName }}</mat-icon>
-    <h1 class="app-title">{{ appName }}</h1>
-    <span class="app-toolbar-spacer"></span>
-  </mat-toolbar>
-</p>
