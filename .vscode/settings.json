@@ -1,6 +1,11 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
+  "files.exclude": {
+    "**/.git": true,
+    "**/dist": true,
+    "**/node_modules": true
+  },
 
   "html.format.wrapAttributes": "force-aligned",
 
