@@ -1,5 +1,10 @@
 <form [formGroup]="formGroup"
       class="border rounded p-2">
+  <!-- <div class="form-row align-items-center">
+    <div class="col-auto">
+      <h4><small class="text-muted">Parameters</small></h4>
+    </div>
+  </div> -->
   <div class="form-row align-items-center">
     <div class="col-auto">
       <label for="ip-address">
@@ -7,6 +12,7 @@
       </label>
       <div class="input-group">
         <input formControlName="ipAddressControl"
+               (input)="onChangeIpAddress()"
                id="ip-address"
                class="form-control"
                [class.is-valid]="ipAddressControl.valid"
@@ -31,7 +37,7 @@
                 id="prefix-length"
                 class="custom-select">
           <option *ngFor="let subnetMask of subnetMasks"
-                  [value]="subnetMask.prefixLength">
+                  [value]="subnetMask">
             {{subnetMask.prefixLength}}
           </option>
         </select>
@@ -45,7 +51,7 @@
                 id="subnet-mask"
                 class="custom-select">
           <option *ngFor="let subnetMask of subnetMasks"
-                  [value]="subnetMask.prefixLength">
+                  [value]="subnetMask">
             {{subnetMask.dotDecimalString}}
           </option>
         </select>
@@ -59,70 +65,10 @@
                 id="useable-host-address-count"
                 class="custom-select">
           <option *ngFor="let subnetMask of subnetMasks"
-                  [value]="subnetMask.prefixLength">
+                  [value]="subnetMask">
             {{subnetMask.usableHostAddressCount}} {{subnetMask.remark}}
           </option>
         </select>
-      </div>
-    </div>
-  </div>
-  <div class="mb-2"></div>
-  <div class="form-row align-items-center">
-    <div class="col-auto">
-      <label for="sid-network-address">Network address</label>
-      <div class="input-group">
-        <input id="sid-network-address"
-               class="form-control"
-               type="text"
-               value=""
-               readonly />
-      </div>
-    </div>
-    <div class="col-auto">
-      <label for="sid-first-address">First address</label>
-      <div class="input-group">
-        <input id="sid-first-address"
-               class="form-control"
-               type="text"
-               value=""
-               readonly />
-      </div>
-    </div>
-    <div class="col-auto">
-      <label for="sid-last-address">Last address</label>
-      <div class="input-group">
-        <input id="sid-last-address"
-               class="form-control"
-               type="text"
-               value=""
-               readonly />
-      </div>
-    </div>
-    <div class="col-auto">
-      <div class="form-row align-items-start">
-        <div class="col-auto">
-          <label for="sid-broadcast-address">Broadcast address</label>
-          <div class="input-group">
-            <input id="sid-broadcast-address"
-                   class="form-control"
-                   type="text"
-                   value=""
-                   readonly />
-          </div>
-        </div>
-        <div class="col-auto">
-          <label for="sid-btn-generate-list">&nbsp;</label>
-          <div class="input-group">
-            <button id="sid-btn-generate-list"
-                    class="btn btn-outline-primary"
-                    type="button"
-                    data-toggle="tooltip"
-                    data-placement="top"
-                    title="Generate IP address list">
-              <span class="bi-list"></span>
-            </button>
-          </div>
-        </div>
       </div>
     </div>
   </div>

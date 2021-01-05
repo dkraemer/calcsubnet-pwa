@@ -1,6 +1,11 @@
-import { AfterContentInit, Component } from '@angular/core';
+import {
+  AfterContentInit,
+  Component,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { SubnetMask } from 'src/lib/calcsubnet';
+import { IpAddress, SubnetInfo, SubnetMask } from 'src/lib/calcsubnet';
 import { CustomValidators } from '../common/custom.validators';
 
 @Component({
@@ -9,6 +14,8 @@ import { CustomValidators } from '../common/custom.validators';
   styleUrls: ['./calculator-input.component.scss'],
 })
 export class CalculatorInputComponent implements AfterContentInit {
+  @Output() subnetInfoChange = new EventEmitter<SubnetInfo>();
+
   readonly maxPrefixLength = 30;
   readonly minPrefixLength = 8;
   readonly subnetMasks: SubnetMask[];
@@ -25,7 +32,7 @@ export class CalculatorInputComponent implements AfterContentInit {
     usableHostsControl: this.usableHostsControl,
   });
 
-  private readonly defaultPrefixLength = 24;
+  private readonly defaultSubnetMask = SubnetMask.fromString('255.255.255.0');
   private readonly setValueOptions = { emitEvent: false };
 
   constructor() {
@@ -35,26 +42,45 @@ export class CalculatorInputComponent implements AfterContentInit {
     );
   }
 
+  emitSubnetInfo(): void {
+    if (this.ipAddressControl.valid) {
+      this.subnetInfoChange.emit(
+        new SubnetInfo(
+          // * Cast is safe: If the address is valid, it cannot be undefined.
+          IpAddress.fromString(this.ipAddressControl.value) as IpAddress,
+          SubnetMask.fromString(this.prefixLengthControl.value) as SubnetMask
+        )
+      );
+    }
+  }
+
+  onChangeIpAddress(): void {
+    this.emitSubnetInfo();
+  }
+
   onChangePrefixLength(): void {
     const value = this.prefixLengthControl.value;
     this.subnetMaskControl.setValue(value, this.setValueOptions);
     this.usableHostsControl.setValue(value, this.setValueOptions);
+    this.emitSubnetInfo();
   }
 
   onChangeSubnetMask(): void {
     const value = this.subnetMaskControl.value;
     this.prefixLengthControl.setValue(value, this.setValueOptions);
     this.usableHostsControl.setValue(value, this.setValueOptions);
+    this.emitSubnetInfo();
   }
 
   onChangeUsableHosts(): void {
     const value = this.usableHostsControl.value;
     this.prefixLengthControl.setValue(value, this.setValueOptions);
     this.subnetMaskControl.setValue(value, this.setValueOptions);
+    this.emitSubnetInfo();
   }
 
   ngAfterContentInit(): void {
-    this.prefixLengthControl.setValue(this.defaultPrefixLength);
+    this.prefixLengthControl.setValue(this.defaultSubnetMask);
     this.onChangePrefixLength();
   }
 }
