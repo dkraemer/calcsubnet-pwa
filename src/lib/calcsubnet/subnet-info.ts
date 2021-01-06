@@ -16,13 +16,27 @@ export class SubnetInfo implements Dumpable {
 
     // eslint-disable-next-line no-bitwise
     const networkAddressValue = (ipAddress.value & subnetMask.value) >>> 0;
-    this.networkAddress = new IpAddress(networkAddressValue, true, false);
+    this.networkAddress = new IpAddress(
+      networkAddressValue,
+      'Network prefix',
+      '',
+      true,
+      false
+    );
+
     this.firstAddress = new IpAddress(networkAddressValue + 1);
 
     const broadcastAddressValue =
       // eslint-disable-next-line no-bitwise
       (networkAddressValue | ~subnetMask.value) >>> 0;
-    this.broadcastAddress = new IpAddress(broadcastAddressValue, false, true);
+    this.broadcastAddress = new IpAddress(
+      broadcastAddressValue,
+      'Broadcast address',
+      '',
+      false,
+      true
+    );
+
     this.lastAddress = new IpAddress(broadcastAddressValue - 1);
   }
 
@@ -31,35 +45,36 @@ export class SubnetInfo implements Dumpable {
     let currentIpAddress = this.networkAddress.value;
 
     while (true) {
-      let isNetworkPrefix = false;
-      let isBroadcastAddress = false;
-      let remarks = '';
-
       if (currentIpAddress === this.networkAddress.value) {
-        isNetworkPrefix = true;
-        remarks = 'Network prefix';
+        ipAddresses.push(this.networkAddress);
       } else if (currentIpAddress === this.broadcastAddress.value) {
-        isBroadcastAddress = true;
-        remarks = 'Broadcast address';
-      }
-
-      ipAddresses.push(
-        new IpAddress(
-          currentIpAddress,
-          isNetworkPrefix,
-          isBroadcastAddress,
-          remarks
-        )
-      );
-
-      if (isBroadcastAddress) {
+        ipAddresses.push(this.broadcastAddress);
         break;
+      } else {
+        ipAddresses.push(new IpAddress(currentIpAddress));
       }
 
       currentIpAddress++;
     }
 
     return ipAddresses;
+  }
+
+  public ipAddressListCsv(
+    header = 'No.;IP Address;DNS Entry;Remark'
+  ): Array<string> {
+    const lines = new Array<string>();
+    lines.push(header);
+    this.ipAddressList.forEach((ip, i) => {
+      lines.push(
+        `${i + 1};` +
+          `${ip.dotDecimalString};` +
+          `${ip.dnsEntry};` +
+          `${ip.remarks}`
+      );
+    });
+
+    return lines;
   }
 
   public dump(): string[] {

@@ -3,9 +3,10 @@ import { DotDecimal } from './dot-decimal';
 export class IpAddress extends DotDecimal {
   constructor(
     ipAddress: number,
-    public readonly isNetworkPrefix: boolean = false,
-    public readonly isBroadcastAddress: boolean = false,
-    remarks: string = ''
+    remarks: string = '',
+    public dnsEntry = '',
+    public isNetworkPrefix: boolean = false,
+    public isBroadcastAddress: boolean = false
   ) {
     super(ipAddress, remarks);
   }

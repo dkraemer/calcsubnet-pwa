@@ -2,7 +2,8 @@
   margin-bottom: 0;
 }
 
-// thead > tr > th,
-// tbody > tr > th {
-//   font-weight: normal;
-// }
+.table-primary > th,
+.table-primary > td {
+  border-color: #dee2e6;
+  background-color: #e9ecef;
+}

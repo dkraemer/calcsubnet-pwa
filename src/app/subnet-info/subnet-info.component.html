@@ -43,7 +43,7 @@
           </div>
         </div>
         <div class="col-auto">
-          <label for="si-btn-show-list">&nbsp;</label>
+          <!-- <label for="si-btn-show-list">&nbsp;</label>
           <div class="input-group">
             <button (click)="emitShowList()"
                     id="si-btn-show-list"
@@ -54,21 +54,21 @@
               <span class="bi-list"></span>
             </button>
           </div>
-        </div>
-        <div class="col-auto">
-          <label for="si-btn-download-list">&nbsp;</label>
-          <div class="input-group">
-            <button (click)="emitDownloadList()"
-                    id="si-btn-download-list"
-                    class="btn btn-outline-primary"
-                    type="button"
-                    [disabled]="subnetInfo === undefined || buttonDisabled"
-                    title="Download IP address list">
-              <span class="bi-download"></span>
-            </button>
+        </div> -->
+          <div class="col-auto">
+            <label for="si-btn-download-list">&nbsp;</label>
+            <div class="input-group">
+              <button (click)="onDownloadList()"
+                      id="si-btn-download-list"
+                      class="btn btn-outline-primary"
+                      type="button"
+                      [disabled]="subnetInfo === undefined || buttonDisabled"
+                      title="Download IP address list">
+                <span class="bi-download"></span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>

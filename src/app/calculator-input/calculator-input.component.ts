@@ -36,7 +36,7 @@ export class CalculatorInputComponent implements AfterContentInit, OnChanges {
     usableHostsControl: this.usableHostsControl,
   });
 
-  private readonly defaultSubnetMask = SubnetMask.fromString('255.255.255.248');
+  private readonly defaultSubnetMask = SubnetMask.fromString('255.255.255.0');
   private readonly setValueOptions = { emitEvent: false };
 
   constructor() {
