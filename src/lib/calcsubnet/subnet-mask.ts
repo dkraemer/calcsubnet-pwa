@@ -113,10 +113,11 @@ export class SubnetMask extends DotDecimal {
    * Create a new instance of SubnetMask.
    *
    * @param value The integer value of the subnet mask to create.
+   * @param remarks Optional remarks for the subnet mask.
    */
-  public constructor(value: number) {
+  public constructor(value: number, remarks = '') {
     SubnetMask.validate(value);
-    super(value);
+    super(value, remarks);
     this.prefixLength = SubnetMask.getPrefixLength(value, false);
     this.hostBitCount = SubnetMask.maxPrefixLength - this.prefixLength;
     this.hostAddressCount = 2 ** this.hostBitCount;

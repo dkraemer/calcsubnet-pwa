@@ -19,33 +19,37 @@ export class SubnetInfo implements Dumpable {
     this.networkAddress = new IpAddress(networkAddressValue, true, false);
     this.firstAddress = new IpAddress(networkAddressValue + 1);
 
-    // eslint-disable-next-line no-bitwise
-    const broadcastAddressValue = (networkAddressValue | ~subnetMask.value) >>> 0;
+    const broadcastAddressValue =
+      // eslint-disable-next-line no-bitwise
+      (networkAddressValue | ~subnetMask.value) >>> 0;
     this.broadcastAddress = new IpAddress(broadcastAddressValue, false, true);
     this.lastAddress = new IpAddress(broadcastAddressValue - 1);
   }
 
-  public static ipAddressList(
-    ipAddress: IpAddress,
-    subnetMask: SubnetMask
-  ): Array<IpAddress> {
+  public get ipAddressList(): Array<IpAddress> {
     const ipAddresses = new Array<IpAddress>();
-    const subnetInfo = new SubnetInfo(ipAddress, subnetMask);
-
-    let currentIpAddress = subnetInfo.networkAddress.value;
+    let currentIpAddress = this.networkAddress.value;
 
     while (true) {
       let isNetworkPrefix = false;
       let isBroadcastAddress = false;
+      let remarks = '';
 
-      if (currentIpAddress === subnetInfo.networkAddress.value) {
+      if (currentIpAddress === this.networkAddress.value) {
         isNetworkPrefix = true;
-      } else if (currentIpAddress === subnetInfo.broadcastAddress.value) {
+        remarks = 'Network prefix';
+      } else if (currentIpAddress === this.broadcastAddress.value) {
         isBroadcastAddress = true;
+        remarks = 'Broadcast address';
       }
 
       ipAddresses.push(
-        new IpAddress(currentIpAddress, isNetworkPrefix, isBroadcastAddress)
+        new IpAddress(
+          currentIpAddress,
+          isNetworkPrefix,
+          isBroadcastAddress,
+          remarks
+        )
       );
 
       if (isBroadcastAddress) {

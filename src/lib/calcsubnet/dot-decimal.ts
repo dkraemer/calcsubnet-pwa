@@ -7,7 +7,10 @@ export abstract class DotDecimal implements Dumpable {
   public readonly octets: number[];
   public readonly dotDecimalString: string;
 
-  protected constructor(public readonly value: number) {
+  protected constructor(
+    public readonly value: number,
+    public readonly remarks: string
+  ) {
     if (value < 0 || value > 0xffffffff) {
       throw new Error('Parameter value must be an unsigned integer (32 Bit)');
     }
@@ -30,6 +33,11 @@ export abstract class DotDecimal implements Dumpable {
       const octetHex = e.toString(Radix.hex);
       hexValue += octetHex.length === 1 ? '0' + octetHex : octetHex;
     });
+
+    //* Don't accept values greater than 0xFFFFFFFF
+    if (hexValue.length > 10) {
+      return undefined;
+    }
 
     return Number.parseInt(hexValue, Radix.hex);
   }

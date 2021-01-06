@@ -4,9 +4,10 @@ export class IpAddress extends DotDecimal {
   constructor(
     ipAddress: number,
     public readonly isNetworkPrefix: boolean = false,
-    public readonly isBroadcastAddress: boolean = false
+    public readonly isBroadcastAddress: boolean = false,
+    remarks: string = ''
   ) {
-    super(ipAddress);
+    super(ipAddress, remarks);
   }
 
   public static fromString(dotDecimalString: string): IpAddress | undefined {
