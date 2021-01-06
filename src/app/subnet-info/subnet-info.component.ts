@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SubnetInfo } from 'src/lib/calcsubnet';
 
 @Component({
@@ -6,10 +6,13 @@ import { SubnetInfo } from 'src/lib/calcsubnet';
   templateUrl: './subnet-info.component.html',
   //styleUrls: ['./subnet-info.component.scss'],
 })
-export class SubnetInfoComponent implements OnInit {
+export class SubnetInfoComponent {
   @Input() subnetInfo: SubnetInfo | undefined;
+  @Input() buttonDisabled = true;
+  @Output() showList = new EventEmitter();
 
-  constructor() {}
-
-  ngOnInit(): void {}
+  emitShowList() {
+    this.showList.emit();
+    this.buttonDisabled = true;
+  }
 }

@@ -17,7 +17,7 @@ export class CalculatorInputComponent implements AfterContentInit {
   @Output() subnetInfoChange = new EventEmitter<SubnetInfo>();
 
   readonly maxPrefixLength = 30;
-  readonly minPrefixLength = 8;
+  readonly minPrefixLength = 16;
   readonly subnetMasks: SubnetMask[];
 
   readonly ipAddressControl = new FormControl(null, CustomValidators.ipAddress);
@@ -32,7 +32,7 @@ export class CalculatorInputComponent implements AfterContentInit {
     usableHostsControl: this.usableHostsControl,
   });
 
-  private readonly defaultSubnetMask = SubnetMask.fromString('255.255.255.0');
+  private readonly defaultSubnetMask = SubnetMask.fromString('255.255.255.248');
   private readonly setValueOptions = { emitEvent: false };
 
   constructor() {

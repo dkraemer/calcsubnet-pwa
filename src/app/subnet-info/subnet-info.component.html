@@ -6,9 +6,9 @@
   </div> -->
   <div class="form-row align-items-center">
     <div class="col-auto">
-      <label for="sid-network-address">Network address</label>
+      <label for="si-network-address">Network address</label>
       <div class="input-group">
-        <input id="sid-network-address"
+        <input id="si-network-address"
                class="form-control"
                type="text"
                [value]="subnetInfo?.networkAddress?.dotDecimalString"
@@ -16,9 +16,9 @@
       </div>
     </div>
     <div class="col-auto">
-      <label for="sid-first-address">First address</label>
+      <label for="si-first-address">First address</label>
       <div class="input-group">
-        <input id="sid-first-address"
+        <input id="si-first-address"
                class="form-control"
                type="text"
                [value]="subnetInfo?.firstAddress?.dotDecimalString"
@@ -26,9 +26,9 @@
       </div>
     </div>
     <div class="col-auto">
-      <label for="sid-last-address">Last address</label>
+      <label for="si-last-address">Last address</label>
       <div class="input-group">
-        <input id="sid-last-address"
+        <input id="si-last-address"
                class="form-control"
                type="text"
                [value]="subnetInfo?.lastAddress?.dotDecimalString"
@@ -38,9 +38,9 @@
     <div class="col-auto">
       <div class="form-row align-items-start">
         <div class="col-auto">
-          <label for="sid-broadcast-address">Broadcast address</label>
+          <label for="si-broadcast-address">Broadcast address</label>
           <div class="input-group">
-            <input id="sid-broadcast-address"
+            <input id="si-broadcast-address"
                    class="form-control"
                    type="text"
                    [value]="subnetInfo?.broadcastAddress?.dotDecimalString"
@@ -48,16 +48,16 @@
           </div>
         </div>
         <!-- <div class="col-auto">
-          <label for="sid-btn-generate-list">&nbsp;</label>
+          <label for="si-btn-show-list">&nbsp;</label>
           <div class="input-group">
-            <button id="sid-btn-generate-list"
+            <button (click)="emitShowList()"
+                    id="si-btn-show-list"
                     class="btn btn-outline-primary"
                     type="button"
-                    [disabled]="subnetInfo === undefined"
-                    data-toggle="tooltip"
-                    data-placement="top"
-                    title="Generate IP address list">
+                    [disabled]="subnetInfo === undefined || buttonDisabled"
+                    title="Show IP address list">
               <span class="bi-list"></span>
+              Show list
             </button>
           </div>
         </div> -->

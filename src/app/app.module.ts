@@ -8,13 +8,19 @@ import { environment } from '../environments/environment';
 import { CalculatorInputComponent } from './calculator-input/calculator-input.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SubnetInfoComponent } from './subnet-info/subnet-info.component';
+import { IPAddressListComponent } from './ipaddress-list/ipaddress-list.component';
 
 const swRegOpts = {
   enabled: environment.production,
 };
 
 @NgModule({
-  declarations: [AppComponent, CalculatorInputComponent, SubnetInfoComponent],
+  declarations: [
+    AppComponent,
+    CalculatorInputComponent,
+    SubnetInfoComponent,
+    IPAddressListComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

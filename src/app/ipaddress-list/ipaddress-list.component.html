@@ -1,0 +1,45 @@
+<form *ngIf="canShowList"
+      [formGroup]="form"
+      role="form"
+      novalidate>
+  <div formArrayName="rowControls">
+    <table class="table border pt-4 bg-white">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>IP address</th>
+          <th>DNS entry</th>
+          <th>Remark</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ipAddress of subnetInfo?.ipAddressList; index as i; trackBy:trackByIpAddress"
+            [formGroupName]="i"
+            [class.table-primary]="ipAddress.remarks != ''">
+          <th>{{i+1}}</th>
+          <td><span>
+
+              {{ipAddress?.dotDecimalString}}
+            </span>
+          </td>
+          <td>
+            <input formControlName="dnsEntryControl"
+                   class="form-control"
+                   type="text" />
+          </td>
+          <td>
+            <input formControlName="remarkControl"
+                   class="form-control"
+                   type="text" />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</form>
+
+<div *ngIf="isListTooBigToShow"
+     class="alert alert-warning"
+     role="alert">
+  The IP address list is not displayed because it has to many entries!
+</div>
