@@ -6,7 +6,9 @@
     </div>
   </div>
   <div class="row d-flex justify-content-lg-center">
-    <app-calculator-input (subnetInfoChange)="onSubnetInfoChange($event)"></app-calculator-input>
+    <app-calculator-input [disabled]="inputDisabled"
+                          (subnetInfoChange)="onSubnetInfoChange($event)">
+    </app-calculator-input>
   </div>
   <div class="mb-2"></div>
   <div class="row d-flex justify-content-lg-center">
@@ -17,7 +19,7 @@
   </div>
   <div class="mb-2"></div>
   <div class="row d-flex justify-content-lg-center">
-    <app-ipaddress-list [subnetInfo]="subnetInfo"
+    <app-ipaddress-list [subnetInfo]="subnetInfoStatic"
                         [showList]="showList"
                         (dirtyList)="onDirtyList()">
     </app-ipaddress-list>

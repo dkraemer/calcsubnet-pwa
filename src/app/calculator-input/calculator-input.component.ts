@@ -2,7 +2,10 @@ import {
   AfterContentInit,
   Component,
   EventEmitter,
+  Input,
+  OnChanges,
   Output,
+  SimpleChanges,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { IpAddress, SubnetInfo, SubnetMask } from 'src/lib/calcsubnet';
@@ -13,7 +16,8 @@ import { CustomValidators } from '../common/custom.validators';
   templateUrl: './calculator-input.component.html',
   //styleUrls: ['./calculator-input.component.scss'],
 })
-export class CalculatorInputComponent implements AfterContentInit {
+export class CalculatorInputComponent implements AfterContentInit, OnChanges {
+  @Input() disabled = false;
   @Output() subnetInfoChange = new EventEmitter<SubnetInfo>();
 
   readonly maxPrefixLength = 30;
@@ -82,5 +86,13 @@ export class CalculatorInputComponent implements AfterContentInit {
   ngAfterContentInit(): void {
     this.prefixLengthControl.setValue(this.defaultSubnetMask);
     this.onChangePrefixLength();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.disabled) {
+      this.formGroup.disable();
+    } else {
+      this.formGroup.enable();
+    }
   }
 }

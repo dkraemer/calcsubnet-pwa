@@ -1,9 +1,4 @@
-<div class="border rounded p-2">
-  <!-- <div class="form-row align-items-center">
-    <div class="col-auto">
-      <h4><small class="text-muted">Details</small></h4>
-    </div>
-  </div> -->
+<div class="border p-2">
   <div class="form-row align-items-center">
     <div class="col-auto">
       <label for="si-network-address">Network address</label>
@@ -47,7 +42,7 @@
                    readonly />
           </div>
         </div>
-        <!-- <div class="col-auto">
+        <div class="col-auto">
           <label for="si-btn-show-list">&nbsp;</label>
           <div class="input-group">
             <button (click)="emitShowList()"
@@ -57,10 +52,22 @@
                     [disabled]="subnetInfo === undefined || buttonDisabled"
                     title="Show IP address list">
               <span class="bi-list"></span>
-              Show list
             </button>
           </div>
-        </div> -->
+        </div>
+        <div class="col-auto">
+          <label for="si-btn-download-list">&nbsp;</label>
+          <div class="input-group">
+            <button (click)="emitDownloadList()"
+                    id="si-btn-download-list"
+                    class="btn btn-outline-primary"
+                    type="button"
+                    [disabled]="subnetInfo === undefined || buttonDisabled"
+                    title="Download IP address list">
+              <span class="bi-download"></span>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

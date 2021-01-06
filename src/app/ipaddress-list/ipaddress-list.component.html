@@ -1,33 +1,38 @@
 <form *ngIf="canShowList"
-      [formGroup]="form"
+      [formGroup]="formGroup"
       role="form"
       novalidate>
   <div formArrayName="rowControls">
-    <table class="table border pt-4 bg-white">
+    <table class="table  table-bordered">
       <thead>
         <tr>
-          <th>#</th>
-          <th>IP address</th>
-          <th>DNS entry</th>
-          <th>Remark</th>
+          <th scope="col">#</th>
+          <th scope="col">IP address</th>
+          <th scope="col">DNS entry</th>
+          <th scope="col">Remark</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let ipAddress of subnetInfo?.ipAddressList; index as i; trackBy:trackByIpAddress"
             [formGroupName]="i"
-            [class.table-primary]="ipAddress.remarks != ''">
-          <th>{{i+1}}</th>
-          <td><span>
+            [class.table-primary]="ipAddress.remarks !== ''"
+            [class.table-warning]="ipAddress.value === subnetInfo?.ipAddress?.value">
 
+          <th class="align-middle"
+              scope="row">
+            {{i+1}}
+          </th>
+          <td class="align-middle">
+            <span>
               {{ipAddress?.dotDecimalString}}
             </span>
           </td>
-          <td>
+          <td class="align-middle">
             <input formControlName="dnsEntryControl"
                    class="form-control"
                    type="text" />
           </td>
-          <td>
+          <td class="align-middle">
             <input formControlName="remarkControl"
                    class="form-control"
                    type="text" />

@@ -13,15 +13,16 @@ import { IpAddress, SubnetInfo } from 'src/lib/calcsubnet';
 @Component({
   selector: 'app-ipaddress-list',
   templateUrl: './ipaddress-list.component.html',
-  //styleUrls: ['./ipaddress-list.component.scss'],
+  styleUrls: ['./ipaddress-list.component.scss'],
 })
 export class IPAddressListComponent implements OnChanges {
+  @Input() disabled = false;
   @Input() subnetInfo: SubnetInfo | undefined;
   @Input() showList = false;
   @Output() readonly dirtyList = new EventEmitter();
 
   rowFormArray = new FormArray([]);
-  form = new FormGroup({
+  formGroup = new FormGroup({
     rowControls: this.rowFormArray,
   });
 
@@ -55,6 +56,12 @@ export class IPAddressListComponent implements OnChanges {
   };
 
   ngOnChanges(_changes: SimpleChanges) {
+    if (this.disabled) {
+      this.formGroup.disable();
+    } else {
+      this.formGroup.enable();
+    }
+
     if (!this.showList) {
       return;
     }

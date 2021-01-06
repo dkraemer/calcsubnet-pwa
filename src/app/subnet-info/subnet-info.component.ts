@@ -10,9 +10,14 @@ export class SubnetInfoComponent {
   @Input() subnetInfo: SubnetInfo | undefined;
   @Input() buttonDisabled = true;
   @Output() showList = new EventEmitter();
+  @Output() downloadList = new EventEmitter();
 
   emitShowList() {
     this.showList.emit();
-    this.buttonDisabled = true;
+    //this.buttonDisabled = true;
+  }
+
+  emitDownloadList() {
+    this.downloadList.emit();
   }
 }

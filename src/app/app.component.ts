@@ -7,9 +7,9 @@ import { SubnetInfo } from 'src/lib/calcsubnet';
   //styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  name = 'calcsub.net';
-  iconName = 'calculate';
+  inputDisabled = false;
   subnetInfo: SubnetInfo | undefined;
+  subnetInfoStatic: SubnetInfo | undefined;
   subnetInfoForIPList: SubnetInfo | undefined;
   buttonDisabled = false;
   showList = false;
@@ -20,6 +20,11 @@ export class AppComponent {
 
   onShowList() {
     this.showList = true;
+    const safeSubnetInfo = this.subnetInfo as SubnetInfo;
+    this.subnetInfoStatic = new SubnetInfo(
+      safeSubnetInfo.ipAddress,
+      safeSubnetInfo.subnetMask
+    );
   }
 
   onDirtyList() {}
